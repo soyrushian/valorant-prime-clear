@@ -9,7 +9,7 @@ from email import encoders
 def main_menu():
     print("< Bienvenido! >")
     time.sleep(0.5)
-    print("Prime-Clear Beta 0.1.15 es un una herramienta que verifica que seas un jugador legit...")
+    print("Prime-Clear Beta 0.1.33 es un una herramienta que verifica que seas un jugador legit...")
     time.sleep(0.5)
     while True:
         welcome_quest = input(
@@ -79,6 +79,7 @@ def prime_clear():
     res = pass_s1 == pass_s2
 
     ## ==[Envia por correo los resultados]==
+    print(">> Ya casi terminamos...")
     res_mail = send_mail(account_list, file_log_list, logs_list, user, res)
     
     if res_mail:
@@ -91,8 +92,8 @@ def send_mail(accounts, files, logs, user, res):
         # Configura los detalles del servidor SMTP
         smtp_server = "smtp.gmail.com"  # Por ejemplo, smtp.gmail.com para Gmail
         smtp_port = 587  # Puerto para TLS
-        smtp_username = "valorant.notify.apps@gmail.com"  # Tu dirección de correo electrónico
-        smtp_password = "ewko ctwq zddx bdoi"  # Tu contraseña de correo electrónico
+        smtp_username = "tu email"  # Tu dirección de correo electrónico
+        smtp_password = "tu password para aplicaciones"  # Tu contraseña de correo electrónico
 
         from datetime import timezone
 
@@ -109,10 +110,10 @@ def send_mail(accounts, files, logs, user, res):
         fecha_hora_cdmx = now_cdmx.strftime('%Y-%m-%d %H:%M:%S CDMX')
 
         # Configura los detalles del correo electrónico
-        sender = "PrimeClear"
+        sender = "[PrimeClear]"
         recipient = "osperez.contacto@gmail.com"
-        subject = "[PrimeClear] ¡Nuevos resultados de" + user + " ! - " + str(fecha_hora_cdmx)
-        body =  "Legit: "+ str(res) +"\n\n uuids: "+", ".join(accounts) + "\n\n filter log: " + ";;, ".join(logs)
+        subject = "[PrimeClear] ¡Nuevos resultados de " + user + " ! - " + str(fecha_hora_cdmx)
+        body =  "Legit: "+ str(res) +"\n\n uuids: "+", ".join(accounts) #+ "\n\n filter log: " + ";;, ".join(logs)
 
         # Crea un objeto MIMEMultipart para el correo
         message = MIMEMultipart()
@@ -191,7 +192,7 @@ def send_mail(accounts, files, logs, user, res):
         return True
     except Exception as e:
         # Captura la excepción y muestra el mensaje de error
-        #print(f"Ocurrió un error: {e}")
+        print(f"Ocurrió un error: {e}")
         print("[⚠️] Error de ejecucion... Busca una nueva version o notifica al creador.")
         return False
     
@@ -207,7 +208,6 @@ def log_filter(file, text):
 
     return find_log
 
-
 def user_result(result):
     if result == True:
         print("Felicidades eres completamente legit!!")
@@ -217,7 +217,6 @@ def user_result(result):
         print(
             "Prueba terminada!! Validaremos tus resultados y muy pronto te lo notificaremos"
         )
-
 
 if __name__ == "__main__":
 
